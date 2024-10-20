@@ -126,7 +126,7 @@ class ClosedLoop:
             observation_t = self.plant.get_depth()
             # Call your controller here
             error = mission.reference[t] - observation_t
-            actions = self.controller.controller_output(error, error_prev)
+            actions[t] = self.controller.controller_output(error, error_prev)
             error_prev = error
 
             self.plant.transition(actions[t], disturbances[t])
