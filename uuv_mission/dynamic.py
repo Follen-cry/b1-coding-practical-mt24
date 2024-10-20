@@ -2,7 +2,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
-from .terrain import generate_reference_and_limits
+from terrain import generate_reference_and_limits
 import csv
 
 
@@ -126,7 +126,7 @@ class ClosedLoop:
             observation_t = self.plant.get_depth()
             # Call your controller here
             error = mission.reference[t] - observation_t
-            actions = self.controller.output(error, error_prev)
+            actions = self.controller.controller_output(error, error_prev)
             error_prev = error
 
             self.plant.transition(actions[t], disturbances[t])
